@@ -29,7 +29,8 @@ def binary_step(X):
     
 def linear(X, constant=1):
     """
-    Linear activation function returns the input multiplied by a constant factor.
+    Linear activation function returns the input multiplied 
+    by a constant factor.
     
     Parameters:
     X: int, -inf to +inf
@@ -49,4 +50,33 @@ def sigmoid(X):
     res = 1 / (1 + np.exp(-X))
     return res
 
-    
+def dsigmoid(X):
+    return sigmoid(X) * (1-sigmoid(X))
+
+def tanh(X):
+    return np.tanh(X)
+
+def dtanh(X):
+    return 1 - np.power(np.tanh(X), 2)
+
+def relu(X):
+    return np.maximum(0, X)
+
+def drelu(X):
+    return 1 if X > 0 else 0
+
+def leaky_relu(X, alpha=0.01):
+    """
+    Leaky ReLU is a variant of the ReLU function that allows a small,
+    non-zero gradient when the input is negative. This helps prevent 
+    the "dying ReLU" problem where neurons become inactive.
+    """
+    return np.maximum(alpha * X, X)
+
+def dleaky_relu(X, alpha=0.01):
+    """
+    Derivative of Leaky ReLU activation function
+    """
+    return 1 if X > 0 else alpha
+
+
